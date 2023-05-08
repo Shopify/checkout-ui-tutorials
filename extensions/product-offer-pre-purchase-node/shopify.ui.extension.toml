@@ -5,8 +5,10 @@ extension_points = [
   'Checkout::Dynamic::Render'
 ]
 
+// [START product_offer_pre_purchase_node.step_1]
 [capabilities]
 api_access = true
+// [END product_offer_pre_purchase_node.step_1]
 
 # [[metafields]]
 # namespace = "my-namespace"

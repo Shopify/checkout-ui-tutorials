@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
 import {
+  React,
+  // [START product_offer_pre_purchase_node.step_2]
+  useEffect,
+  useState,
+  // [END product_offer_pre_purchase_node.step_2]
+} from "react";
+import {
+  useExtensionApi,
   render,
+  Banner,
+  // [START product_offer_pre_purchase_node.step_2]
   Divider,
   Image,
-  Banner,
   Heading,
   Button,
   InlineLayout,
@@ -13,30 +21,31 @@ import {
   SkeletonImage,
   useCartLines,
   useApplyCartLinesChange,
-  useExtensionApi,
+  // [END product_offer_pre_purchase_node.step_2]
 } from "@shopify/checkout-ui-extensions-react";
 
-// Set up the entry point for the extension
+// [START product_offer_pre_purchase_node.step_3]
 render("Checkout::Dynamic::Render", () => <App />);
+// [END product_offer_pre_purchase_node.step_3]
 
-// The function that will render the app
 function App() {
-  // Use `query` for fetching product data from the Storefront API, and use `i18n` to format
-  // currencies, numbers, and translate strings
   const { query, i18n } = useExtensionApi();
-  // Get a reference to the function that will apply changes to the cart lines from the imported hook
   const applyCartLinesChange = useApplyCartLinesChange();
-  // Set up the states
+
+  // [START product_offer_pre_purchase_node.step_4]
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [adding, setAdding] = useState(false);
-  const [showError, setShowError] = useState(false);
+  // [END product_offer_pre_purchase_node.step_4]
 
-  // On initial load, fetch the product variants
+  const [adding, setAdding] = useState(false);
+
+  // [START product_offer_pre_purchase_node.step_7]
+  const [showError, setShowError] = useState(false);
+  // [START product_offer_pre_purchase_node.step_7]
+
+  // [START product_offer_pre_purchase_node.step_4]
   useEffect(() => {
-    // Set the loading state to show some UI if you're waiting
     setLoading(true);
-    // Use `query` api method to send graphql queries to the Storefront API
     query(
       `query ($first: Int!) {
         products(first: $first) {
@@ -64,26 +73,27 @@ function App() {
       },
     )
     .then(({data}) => {
-      // Set the `products` array so that you can reference the array items
       setProducts(data.products.nodes);
     })
     .catch((error) => console.error(error))
     .finally(() => setLoading(false));
   }, []);
+  // [END product_offer_pre_purchase_node.step_4]
 
-  // If an offer is added and an error occurs, then show some error feedback using a banner
+  // [START product_offer_pre_purchase_node.step_7]
   useEffect(() => {
     if (showError) {
       const timer = setTimeout(() => setShowError(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [showError]);
+  // [END product_offer_pre_purchase_node.step_7]
 
-  // Access the current cart lines and subscribe to changes
+  // [START product_offer_pre_purchase_node.step_6]
   const lines = useCartLines();
+  // [START product_offer_pre_purchase_node.step_6]
 
-  // Show a loading UI if you're waiting for product variant data
-  // Use Skeleton components to keep placement from shifting when content loads
+  // [START product_offer_pre_purchase_node.step_5]
   if (loading) {
     return (
       <BlockStack spacing="loose">
@@ -108,14 +118,16 @@ function App() {
       </BlockStack>
     );
   }
-  // If product variants can't be loaded, then show nothing
+  // [END product_offer_pre_purchase_node.step_5]
+
+  // [START product_offer_pre_purchase_node.step_6]
   if (!loading && products.length === 0) {
     return null;
   }
+  // [START product_offer_pre_purchase_node.step_6]
 
-  // Get the IDs of all product variants in the cart
+  // [START product_offer_pre_purchase_node.step_6]
   const cartLineProductVariantIds = lines.map((item) => item.merchandise.id);
-  // Filter out any products on offer that are already in the cart
   const productsOnOffer = products.filter(
     (product) => {
       const isProductVariantInCart = product.variants.nodes.some(
@@ -125,32 +137,30 @@ function App() {
     }
   );
 
-  // If all of the products are in the cart, then don't show the offer
   if (!productsOnOffer.length) {
     return null;
   }
 
-  // Choose the first available product variant on offer
   const { images, title, variants } = productsOnOffer[0];
 
-  // Localize the currency for international merchants and customers
   const renderPrice = i18n.formatCurrency(variants.nodes[0].price.amount);
 
-  // Use the first product image or a placeholder if the product has no images
   const imageUrl = images.nodes[0]?.url
     ?? "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_medium.png?format=webp&v=1530129081";
 
+  // [END product_offer_pre_purchase_node.step_6]
+
+  // [START product_offer_pre_purchase_node.step_7]
   return (
+  // [END product_offer_pre_purchase_node.step_7]
+
+    // [START product_offer_pre_purchase_node.step_8]
     <BlockStack spacing="loose">
       <Divider />
       <Heading level={2}>You might also like</Heading>
       <BlockStack spacing="loose">
         <InlineLayout
           spacing="base"
-          // Use the `columns` property to set the width of the columns
-          // Image: column should be 64px wide
-          // BlockStack: column, which contains the title and price, should "fill" all available space
-          // Button: column should "auto" size based on the intrinsic width of the elements
           columns={[64, "fill", "auto"]}
           blockAlignment="center"
         >
@@ -174,7 +184,6 @@ function App() {
             accessibilityLabel={`Add ${title} to cart`}
             onPress={async () => {
               setAdding(true);
-              // Apply the cart lines change
               const result = await applyCartLinesChange({
                 type: "addCartLine",
                 merchandiseId: variants.nodes[0].id,
@@ -182,9 +191,6 @@ function App() {
               });
               setAdding(false);
               if (result.type === "error") {
-                // An error occurred adding the cart line
-                // Verify that you're using a valid product variant ID
-                // For example, 'gid://shopify/ProductVariant/123'
                 setShowError(true);
                 console.error(result.message);
               }
@@ -194,11 +200,20 @@ function App() {
           </Button>
         </InlineLayout>
       </BlockStack>
+      // [END product_offer_pre_purchase_node.step_8]
+
+      // [START product_offer_pre_purchase_node.step_7]
       {showError && (
         <Banner status="critical">
           There was an issue adding this product. Please try again.
         </Banner>
       )}
-    </BlockStack>
+      // [END product_offer_pre_purchase_node.step_7]
+      // [START product_offer_pre_purchase_node.step_8]
+      </BlockStack>
+      // [END product_offer_pre_purchase_node.step_8]
+
+  // [START product_offer_pre_purchase_node.step_7]
   );
+  // [END product_offer_pre_purchase_node.step_7]
 }
