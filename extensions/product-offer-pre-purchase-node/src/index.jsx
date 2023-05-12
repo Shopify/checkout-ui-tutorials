@@ -30,7 +30,6 @@ function App() {
   const applyCartLinesChange = useApplyCartLinesChange();
 // [END product_offer-pre_purchase-react.sec_2-step_2_2]
   const [products, setProducts] = useState([]);
-// [END product_offer-pre_purchase-react.sec_2-step_2_1]
 // [START product_offer-pre_purchase-react.sec_2-step_3_2]
   const [loading, setLoading] = useState(false);
 // [END product_offer-pre_purchase-react.sec_2-step_3_2]
@@ -44,7 +43,6 @@ function App() {
 // [START product_offer-pre_purchase-react.sec_2-step_3_2]
     setLoading(true);
 // [END product_offer-pre_purchase-react.sec_2-step_3_2]
-// [START product_offer-pre_purchase-react.sec_2-step_2_1]
     query(
       `query ($first: Int!) {
         products(first: $first) {
@@ -77,13 +75,11 @@ function App() {
 // [START product_offer-pre_purchase-react.sec_2-step_3_3]
     .catch((error) => console.error(error))
 // [START product_offer-pre_purchase-react.sec_2-step_3_3]
-
 // [START product_offer-pre_purchase-react.sec_2-step_3_2]
     .finally(() => setLoading(false));
 // [END product_offer-pre_purchase-react.sec_2-step_3_2]
   }, []);
 // [END product_offer-pre_purchase-react.sec_2-step_2_1]
-
 // [START product_offer-pre_purchase-react.sec_2-step_3_3]
   useEffect(() => {
     if (showError) {
@@ -121,13 +117,10 @@ function App() {
     );
   }
 // [END product_offer-pre_purchase-react.sec_2-step_3_2]
-
 // [START product_offer-pre_purchase-react.sec_2-step_2_3]
   if (!loading && products.length === 0) {
     return null;
   }
-// [END product_offer-pre_purchase-react.sec_2-step_2_3]
-// [START product_offer-pre_purchase-react.sec_2-step_2_3]
   const cartLineProductVariantIds = lines.map((item) => item.merchandise.id);
   const productsOnOffer = products.filter(
     (product) => {
@@ -194,7 +187,6 @@ function App() {
           </Button>
         </InlineLayout>
       </BlockStack>
-{/* [END product_offer-pre_purchase-react.sec_2-step_3_1] */}
 {/* [START product_offer-pre_purchase-react.sec_2-step_3_3] */}
       {showError && (
         <Banner status="critical">
@@ -202,7 +194,6 @@ function App() {
         </Banner>
       )}
 {/* [END product_offer-pre_purchase-react.sec_2-step_3_3] */}
-{/* [START product_offer-pre_purchase-react.sec_2-step_3_1] */}
       </BlockStack>
   );
 // [END product_offer-pre_purchase-react.sec_2-step_3_1]
