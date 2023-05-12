@@ -110,11 +110,9 @@ function App() {
     }
   }, [showError]);
 // [END product_offer-pre_purchase-react.sec_2-step_3_3]
-
 // [START product_offer-pre_purchase-react.sec_2-step_2_2]
   const lines = useCartLines();
 // [END product_offer-pre_purchase-react.sec_2-step_2_2]
-
 // [START product_offer-pre_purchase-react.sec_2-step_3_2]
   if (loading) {
     return (
@@ -163,12 +161,9 @@ function App() {
     return null;
   }
 // [END product_offer-pre_purchase-react.sec_2-step_2_3]
-
 // [START product_offer-pre_purchase-react.sec_2-step_2_1]
   const { images, title, variants } = productsOnOffer[0];
-
   const renderPrice = i18n.formatCurrency(variants.nodes[0].price.amount);
-
   const imageUrl = images.nodes[0]?.url
     ?? "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_medium.png?format=webp&v=1530129081";
 // [END product_offer-pre_purchase-react.sec_2-step_2_1]
