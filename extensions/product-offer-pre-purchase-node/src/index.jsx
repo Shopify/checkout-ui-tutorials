@@ -43,7 +43,6 @@ function App() {
 // [START product_offer-pre_purchase-react.sec_2-step_3_3]
   const [showError, setShowError] = useState(false);
 // [START product_offer-pre_purchase-react.sec_2-step_3_3]
-
 // [START product_offer-pre_purchase-react.sec_2-step_2_1]
   useEffect(() => {
 // [END product_offer-pre_purchase-react.sec_2-step_2_1]
