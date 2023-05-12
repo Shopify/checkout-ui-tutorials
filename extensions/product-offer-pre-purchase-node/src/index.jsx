@@ -220,17 +220,17 @@ function App() {
           </Button>
         </InlineLayout>
       </BlockStack>
-// [END product_offer-pre_purchase-react.sec_2-step_3_1]
+{/* [END product_offer-pre_purchase-react.sec_2-step_3_1] */}
 
-// [START product_offer-pre_purchase-react.sec_2-step_3_3]
+{/* [START product_offer-pre_purchase-react.sec_2-step_3_3] */}
       {showError && (
         <Banner status="critical">
           There was an issue adding this product. Please try again.
         </Banner>
       )}
-// [END product_offer-pre_purchase-react.sec_2-step_3_3]
+{/* [END product_offer-pre_purchase-react.sec_2-step_3_3] */}
 
-// [START product_offer-pre_purchase-react.sec_2-step_3_1]
+{/* [START product_offer-pre_purchase-react.sec_2-step_3_1] */}
       </BlockStack>
   );
 // [END product_offer-pre_purchase-react.sec_2-step_3_1]
