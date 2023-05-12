@@ -1,15 +1,13 @@
+// need to decide where to highlight these imports
 import {
   React,
-  // [START product_offer_pre_purchase_node.step_2]
   useEffect,
   useState,
-  // [END product_offer_pre_purchase_node.step_2]
 } from "react";
 import {
   useExtensionApi,
   render,
   Banner,
-  // [START product_offer_pre_purchase_node.step_2]
   Divider,
   Image,
   Heading,
@@ -21,31 +19,46 @@ import {
   SkeletonImage,
   useCartLines,
   useApplyCartLinesChange,
-  // [END product_offer_pre_purchase_node.step_2]
 } from "@shopify/checkout-ui-extensions-react";
 
-// [START product_offer_pre_purchase_node.step_3]
+// [START product_offer-pre_purchase-react.sec_2-step_1]
 render("Checkout::Dynamic::Render", () => <App />);
-// [END product_offer_pre_purchase_node.step_3]
+// [END product_offer-pre_purchase-react.sec_2-step_1]
 
+// [START product_offer-pre_purchase-react.sec_2-step_2_1]
 function App() {
   const { query, i18n } = useExtensionApi();
+// [END product_offer-pre_purchase-react.sec_2-step_2_1]
+
+// [START product_offer-pre_purchase-react.sec_2-step_2_2]
   const applyCartLinesChange = useApplyCartLinesChange();
+// [END product_offer-pre_purchase-react.sec_2-step_2_2]
 
-  // [START product_offer_pre_purchase_node.step_4]
+// [START product_offer-pre_purchase-react.sec_2-step_2_1]
   const [products, setProducts] = useState([]);
+// [END product_offer-pre_purchase-react.sec_2-step_2_1]
+
+// [START product_offer-pre_purchase-react.sec_2-step_3-2]
   const [loading, setLoading] = useState(false);
-  // [END product_offer_pre_purchase_node.step_4]
+// [END product_offer-pre_purchase-react.sec_2-step_3-2]
 
+// [START product_offer-pre_purchase-react.sec_2-step_3-1]
   const [adding, setAdding] = useState(false);
+// [START product_offer-pre_purchase-react.sec_2-step_3-1]
 
-  // [START product_offer_pre_purchase_node.step_7]
+// [START product_offer-pre_purchase-react.sec_2-step_3-3]
   const [showError, setShowError] = useState(false);
-  // [START product_offer_pre_purchase_node.step_7]
+// [START product_offer-pre_purchase-react.sec_2-step_3-3]
 
-  // [START product_offer_pre_purchase_node.step_4]
+// [START product_offer-pre_purchase-react.sec_2-step_2_1]
   useEffect(() => {
+// [END product_offer-pre_purchase-react.sec_2-step_2_1]
+
+// [START product_offer-pre_purchase-react.sec_2-step_3-2]
     setLoading(true);
+// [END product_offer-pre_purchase-react.sec_2-step_3-2]
+
+// [START product_offer-pre_purchase-react.sec_2-step_2_1]
     query(
       `query ($first: Int!) {
         products(first: $first) {
@@ -75,25 +88,34 @@ function App() {
     .then(({data}) => {
       setProducts(data.products.nodes);
     })
-    .catch((error) => console.error(error))
-    .finally(() => setLoading(false));
-  }, []);
-  // [END product_offer_pre_purchase_node.step_4]
+// [END product_offer-pre_purchase-react.sec_2-step_2_1]
 
-  // [START product_offer_pre_purchase_node.step_7]
+// [START product_offer-pre_purchase-react.sec_2-step_3-3]
+    .catch((error) => console.error(error))
+// [START product_offer-pre_purchase-react.sec_2-step_3-3]
+
+// [START product_offer-pre_purchase-react.sec_2-step_3-2]
+    .finally(() => setLoading(false));
+// [END product_offer-pre_purchase-react.sec_2-step_3-2]
+
+// [START product_offer-pre_purchase-react.sec_2-step_2_1]
+  }, []);
+// [END product_offer-pre_purchase-react.sec_2-step_2_1]
+
+// [START product_offer-pre_purchase-react.sec_2-step_3-3]
   useEffect(() => {
     if (showError) {
       const timer = setTimeout(() => setShowError(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [showError]);
-  // [END product_offer_pre_purchase_node.step_7]
+// [END product_offer-pre_purchase-react.sec_2-step_3-3]
 
-  // [START product_offer_pre_purchase_node.step_6]
+// [START product_offer-pre_purchase-react.sec_2-step_2_2]
   const lines = useCartLines();
-  // [START product_offer_pre_purchase_node.step_6]
+// [END product_offer-pre_purchase-react.sec_2-step_2_2]
 
-  // [START product_offer_pre_purchase_node.step_5]
+// [START product_offer-pre_purchase-react.sec_2-step_3-2]
   if (loading) {
     return (
       <BlockStack spacing="loose">
@@ -118,15 +140,15 @@ function App() {
       </BlockStack>
     );
   }
-  // [END product_offer_pre_purchase_node.step_5]
+// [END product_offer-pre_purchase-react.sec_2-step_3-2]
 
-  // [START product_offer_pre_purchase_node.step_6]
+// [START product_offer-pre_purchase-react.sec_2-step_2-3]
   if (!loading && products.length === 0) {
     return null;
   }
-  // [START product_offer_pre_purchase_node.step_6]
+// [END product_offer-pre_purchase-react.sec_2-step_2-3]
 
-  // [START product_offer_pre_purchase_node.step_6]
+// [START product_offer-pre_purchase-react.sec_2-step_2_3]
   const cartLineProductVariantIds = lines.map((item) => item.merchandise.id);
   const productsOnOffer = products.filter(
     (product) => {
@@ -140,21 +162,19 @@ function App() {
   if (!productsOnOffer.length) {
     return null;
   }
+// [END product_offer-pre_purchase-react.sec_2-step_2_3]
 
+// [START product_offer-pre_purchase-react.sec_2-step_2_1]
   const { images, title, variants } = productsOnOffer[0];
 
   const renderPrice = i18n.formatCurrency(variants.nodes[0].price.amount);
 
   const imageUrl = images.nodes[0]?.url
     ?? "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_medium.png?format=webp&v=1530129081";
+// [END product_offer-pre_purchase-react.sec_2-step_2_1]
 
-  // [END product_offer_pre_purchase_node.step_6]
-
-  // [START product_offer_pre_purchase_node.step_7]
+// [START product_offer-pre_purchase-react.sec_2-step_3-1]
   return (
-  // [END product_offer_pre_purchase_node.step_7]
-
-    // [START product_offer_pre_purchase_node.step_8]
     <BlockStack spacing="loose">
       <Divider />
       <Heading level={2}>You might also like</Heading>
@@ -200,20 +220,21 @@ function App() {
           </Button>
         </InlineLayout>
       </BlockStack>
-      // [END product_offer_pre_purchase_node.step_8]
+// [END product_offer-pre_purchase-react.sec_2-step_3-1]
 
-      // [START product_offer_pre_purchase_node.step_7]
+// [START product_offer-pre_purchase-react.sec_2-step_3-3]
       {showError && (
         <Banner status="critical">
           There was an issue adding this product. Please try again.
         </Banner>
       )}
-      // [END product_offer_pre_purchase_node.step_7]
-      // [START product_offer_pre_purchase_node.step_8]
-      </BlockStack>
-      // [END product_offer_pre_purchase_node.step_8]
+// [END product_offer-pre_purchase-react.sec_2-step_3-3]
 
-  // [START product_offer_pre_purchase_node.step_7]
+// [START product_offer-pre_purchase-react.sec_2-step_3-1]
+      </BlockStack>
   );
-  // [END product_offer_pre_purchase_node.step_7]
+// [END product_offer-pre_purchase-react.sec_2-step_3-1]
+
+// [START product_offer-pre_purchase-react.sec_2-step_2_1]
 }
+// [END product_offer-pre_purchase-react.sec_2-step_2_1]
