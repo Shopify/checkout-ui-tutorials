@@ -34,21 +34,21 @@ function App() {
 // [START product_offer-pre_purchase-react.sec_2-step_2_1]
   const [products, setProducts] = useState([]);
 // [END product_offer-pre_purchase-react.sec_2-step_2_1]
-// [START product_offer-pre_purchase-react.sec_2-step_3_2]
+// [START product_offer-pre_purchase-react.sec_2-step_3_3]
   const [loading, setLoading] = useState(false);
-// [END product_offer-pre_purchase-react.sec_2-step_3_2]
+// [END product_offer-pre_purchase-react.sec_2-step_3_3]
 // [START product_offer-pre_purchase-react.sec_2-step_3_1]
   const [adding, setAdding] = useState(false);
 // [START product_offer-pre_purchase-react.sec_2-step_3_1]
-// [START product_offer-pre_purchase-react.sec_2-step_3_3]
+// [START product_offer-pre_purchase-react.sec_2-step_3_4]
   const [showError, setShowError] = useState(false);
-// [START product_offer-pre_purchase-react.sec_2-step_3_3]
+// [START product_offer-pre_purchase-react.sec_2-step_3_4]
 // [START product_offer-pre_purchase-react.sec_2-step_2_1]
   useEffect(() => {
 // [END product_offer-pre_purchase-react.sec_2-step_2_1]
-// [START product_offer-pre_purchase-react.sec_2-step_3_2]
+// [START product_offer-pre_purchase-react.sec_2-step_3_3]
     setLoading(true);
-// [END product_offer-pre_purchase-react.sec_2-step_3_2]
+// [END product_offer-pre_purchase-react.sec_2-step_3_3]
 // [START product_offer-pre_purchase-react.sec_2-step_2_1]
     query(
       `query ($first: Int!) {
@@ -80,27 +80,27 @@ function App() {
       setProducts(data.products.nodes);
     })
 // [END product_offer-pre_purchase-react.sec_2-step_2_1]
-// [START product_offer-pre_purchase-react.sec_2-step_3_3]
+// [START product_offer-pre_purchase-react.sec_2-step_3_4]
     .catch((error) => console.error(error))
+// [START product_offer-pre_purchase-react.sec_2-step_3_4]
 // [START product_offer-pre_purchase-react.sec_2-step_3_3]
-// [START product_offer-pre_purchase-react.sec_2-step_3_2]
     .finally(() => setLoading(false));
-// [END product_offer-pre_purchase-react.sec_2-step_3_2]
+// [END product_offer-pre_purchase-react.sec_2-step_3_3]
 // [START product_offer-pre_purchase-react.sec_2-step_2_1]
   }, []);
 // [END product_offer-pre_purchase-react.sec_2-step_2_1]
-// [START product_offer-pre_purchase-react.sec_2-step_3_3]
+// [START product_offer-pre_purchase-react.sec_2-step_3_4]
   useEffect(() => {
     if (showError) {
       const timer = setTimeout(() => setShowError(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [showError]);
-// [END product_offer-pre_purchase-react.sec_2-step_3_3]
+// [END product_offer-pre_purchase-react.sec_2-step_3_4]
 // [START product_offer-pre_purchase-react.sec_2-step_2_2]
   const lines = useCartLines();
 // [END product_offer-pre_purchase-react.sec_2-step_2_2]
-// [START product_offer-pre_purchase-react.sec_2-step_3_2]
+// [START product_offer-pre_purchase-react.sec_2-step_3_3]
   if (loading) {
     return (
       <BlockStack spacing="loose">
@@ -125,7 +125,7 @@ function App() {
       </BlockStack>
     );
   }
-// [END product_offer-pre_purchase-react.sec_2-step_3_2]
+// [END product_offer-pre_purchase-react.sec_2-step_3_3]
 // [START product_offer-pre_purchase-react.sec_2-step_2_3]
   if (!loading && products.length === 0) {
     return null;
@@ -177,6 +177,8 @@ function App() {
             </Text>
             <Text appearance="subdued">{renderPrice}</Text>
           </BlockStack>
+{/* [END product_offer-pre_purchase-react.sec_2-step_3_1] */}
+{/* [START product_offer-pre_purchase-react.sec_2-step_3_2] */}
           <Button
             kind="secondary"
             loading={adding}
@@ -197,17 +199,19 @@ function App() {
           >
             Add
           </Button>
+{/* [END product_offer-pre_purchase-react.sec_2-step_3_2] */}
+{/* [START product_offer-pre_purchase-react.sec_2-step_3_1] */}
         </InlineLayout>
       </BlockStack>
 {/* [END product_offer-pre_purchase-react.sec_2-step_3_1] */}
 
-{/* [START product_offer-pre_purchase-react.sec_2-step_3_3] */}
+{/* [START product_offer-pre_purchase-react.sec_2-step_3_4] */}
       {showError && (
         <Banner status="critical">
           There was an issue adding this product. Please try again.
         </Banner>
       )}
-{/* [END product_offer-pre_purchase-react.sec_2-step_3_3] */}
+{/* [END product_offer-pre_purchase-react.sec_2-step_3_4] */}
 {/* [START product_offer-pre_purchase-react.sec_2-step_3_1] */}
       </BlockStack>
   );
