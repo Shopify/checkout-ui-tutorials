@@ -206,6 +206,7 @@ extend(
         return;
       }
 
+// [START product_offer-pre_purchase-js.step_6_1]
       const { images, title, variants } = productsOnOffer[0];
 
       const renderPrice = i18n.formatCurrency(variants.nodes[0].price.amount);
@@ -220,6 +221,7 @@ extend(
       });
       priceMarkup.updateText(renderPrice);
       merchandise.id = variants.nodes[0].id;
+// [END product_offer-pre_purchase-js.step_6_1]
 
       if (!appRendered) {
         root.removeChild(loadingState);
