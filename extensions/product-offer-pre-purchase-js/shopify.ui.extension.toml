@@ -5,18 +5,7 @@ extension_points = [
   'Checkout::Dynamic::Render'
 ]
 
-# [[metafields]]
-# namespace = "my-namespace"
-# key = "my-key"
-
-# [[metafields]]
-# namespace = "my-namespace"
-# key = "my-key-2"
-
-# Read more on extension settings at https://shopify.dev/api/checkout-extensions/checkout/configuration
-# [settings]
-#   [[settings.fields]]
-#   key = "banner_title"
-#   type = "single_line_text_field"
-#   name = "Banner title"
-#   description = "Enter a title for the banner"
+# [START product_offer-pre_purchase-js.step_2]
+[capabilities]
+api_access = true
+# [END product_offer-pre_purchase-js.step_2]
