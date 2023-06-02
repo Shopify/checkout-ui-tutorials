@@ -1,0 +1,11 @@
+type = "checkout_ui_extension"
+name = "product-offer-pre-purchase-js"
+
+extension_points = [
+  'Checkout::Dynamic::Render'
+]
+
+# [START product_offer-pre_purchase-js.step_2]
+[capabilities]
+api_access = true
+# [END product_offer-pre_purchase-js.step_2]

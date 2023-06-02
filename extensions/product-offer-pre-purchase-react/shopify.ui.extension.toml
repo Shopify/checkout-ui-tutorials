@@ -1,5 +1,5 @@
 type = "checkout_ui_extension"
-name = "product-offer-pre-purchase-node"
+name = "product-offer-pre-purchase-react"
 
 extension_points = [
   'Checkout::Dynamic::Render'
