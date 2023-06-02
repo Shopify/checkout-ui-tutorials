@@ -40,7 +40,7 @@ You can customize your new extension by editing the code in the `src/index.js` o
 > If you are building an extension that is tied to existing UI element in the checkout, such as the cart lines or shipping method, you can change the extension point so that your UI extension will render in the correct location. Check out the list of [all available extension points](https://shopify.dev/api/checkout-extensions/checkout#extension-points) to get some inspiration for the kinds of content you can provide with checkout UI extensions.
 
 
-To shape your extension you have the following collection of tools available:
+To build your extension you have the following collection of tools available:
 * [UI components](https://shopify.dev/api/checkout-extensions/checkout/components), the visual elements you can render in your extension.
 * [Extension APIs](https://shopify.dev/api/checkout-extensions/checkout/extension-points/api), which give you access to read and write data in the checkout.
 
@@ -50,11 +50,11 @@ To shape your extension you have the following collection of tools available:
 * **How can I preview my extension?**
 
   1. Make sure you've started your local development server using `npm|yarn|pnpm dev`
-  2. Depending on your selected location they may be either `dynamic` or `static` extension points, which diferr slightly on the process to preview them.
+  2. Depending on your selected location they may be either `dynamic` or `static` extension points, which differ slightly on the process to preview them.
       - `Dynamic extensions` can be placed using a [query string parameter](https://shopify.dev/apps/checkout/test-ui-extensions#dynamic-extension-points).
       - `Static extensions` require no extra work, just note that a static extension is shown only if the section that they are attached to is enabled.
 
-* **How can I change my extension type?**
+* **How can I change my extension point?**
 
     To change your extension type, be mindful that you have to change it in the following places:
     1. In your `script file`, where you declared the extension (will be either _render()_ or _extend()_), you'll have to change the declared Extension Point.
