@@ -11,6 +11,7 @@ import {
   SkeletonImage,
   SkeletonText,
 } from "@shopify/checkout-ui-extensions";
+
 // [START product_offer-pre_purchase-js.step_4]
 extend(
   "Checkout::Dynamic::Render",
@@ -124,6 +125,7 @@ function fetchProducts(query) {
     });
 }
 // [END product_offer-pre_purchase-js.step_5_1]
+
 // [START product_offer-pre_purchase-js.step_6_3]
 function createLoadingState(root) {
   return root.createComponent(BlockStack, { spacing: "loose" }, [
@@ -183,6 +185,7 @@ function createAddButtonComponent(root, applyCartLinesChange, merchandise) {
 }
 
 async function handleAddButtonPress(root, applyCartLinesChange, merchandise) {
+
   // [START product_offer-pre_purchase-js.step_6_2]
   const result = await applyCartLinesChange({
     type: "addCartLine",
@@ -198,6 +201,7 @@ async function handleAddButtonPress(root, applyCartLinesChange, merchandise) {
     );
   }
 }
+
 // [START product_offer-pre_purchase-js.step_6_4]
 function displayErrorBanner(root, message) {
   const errorComponent = root.createComponent(Banner, { status: "critical" }, [
