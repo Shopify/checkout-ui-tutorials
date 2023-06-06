@@ -11,11 +11,11 @@ import {
   SkeletonImage,
   SkeletonText,
 } from "@shopify/checkout-ui-extensions";
-// [START product_offer-pre_purchase-js.step_4]
+// [START product_offer-pre_purchase-js.step_2_2]
 extend(
   "Checkout::Dynamic::Render",
   (root, { lines, applyCartLinesChange, query, i18n }) => {
-    // [END product_offer-pre_purchase-js.step_4]
+    // [END product_offer-pre_purchase-js.step_2_2]
     let products = [];
     let loading = true;
     let appRendered = false;
