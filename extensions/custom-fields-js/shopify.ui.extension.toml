@@ -1,6 +1,8 @@
 type = "checkout_ui_extension"
 name = "custom-fields-js"
 
+# [START custom_field-js.step_3_1]
 extension_points = [
   'Checkout::ShippingMethods::RenderAfter'
 ]
+# [END custom_field-js.step_3_1]
