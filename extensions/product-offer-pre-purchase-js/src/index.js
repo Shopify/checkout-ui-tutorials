@@ -11,11 +11,11 @@ import {
   SkeletonImage,
   SkeletonText,
 } from "@shopify/checkout-ui-extensions";
-// [START product_offer-pre_purchase-js.step_2_2]
+// [START product_offer-pre_purchase-js.ext-index]
 extend(
   "Checkout::Dynamic::Render",
   (root, { lines, applyCartLinesChange, query, i18n }) => {
-    // [END product_offer-pre_purchase-js.step_2_2]
+    // [END product_offer-pre_purchase-js.ext-index]
     let products = [];
     let loading = true;
     let appRendered = false;
@@ -27,9 +27,9 @@ extend(
       renderApp();
     });
 
-    // [START product_offer-pre_purchase-js.step_5_2]
+    // [START product_offer-pre_purchase-js.retrieve-cart-data]
     lines.subscribe(() => renderApp());
-    // [End product_offer-pre_purchase-js.step_5_2]
+    // [End product_offer-pre_purchase-js.retrieve-cart-data]
 
     const loadingState = createLoadingState(root);
     if (loading) {
@@ -89,7 +89,7 @@ extend(
   }
 );
 
-// [START product_offer-pre_purchase-js.step_5_1]
+// [START product_offer-pre_purchase-js.retrieve-products]
 function fetchProducts(query) {
   return query(
     `query ($first: Int!) {
@@ -123,8 +123,8 @@ function fetchProducts(query) {
       return [];
     });
 }
-// [END product_offer-pre_purchase-js.step_5_1]
-// [START product_offer-pre_purchase-js.step_6_3]
+// [END product_offer-pre_purchase-js.retrieve-products]
+// [START product_offer-pre_purchase-js.loading-state]
 function createLoadingState(root) {
   return root.createComponent(BlockStack, { spacing: "loose" }, [
     root.createComponent(Divider),
@@ -151,7 +151,7 @@ function createLoadingState(root) {
     ]),
   ]);
 }
-// [END product_offer-pre_purchase-js.step_6_3]
+// [END product_offer-pre_purchase-js.loading-state]
 
 function createProductComponents(root) {
   const imageComponent = root.createComponent(Image, {
@@ -183,13 +183,13 @@ function createAddButtonComponent(root, applyCartLinesChange, merchandise) {
 }
 
 async function handleAddButtonPress(root, applyCartLinesChange, merchandise) {
-  // [START product_offer-pre_purchase-js.step_6_2]
+  // [START product_offer-pre_purchase-js.add-to-cart]
   const result = await applyCartLinesChange({
     type: "addCartLine",
     merchandiseId: merchandise.id,
     quantity: 1,
   });
-  // [END product_offer-pre_purchase-js.step_6_2]
+  // [END product_offer-pre_purchase-js.add-to-cart]
 
   if (result.type === "error") {
     displayErrorBanner(
@@ -198,7 +198,7 @@ async function handleAddButtonPress(root, applyCartLinesChange, merchandise) {
     );
   }
 }
-// [START product_offer-pre_purchase-js.step_6_4]
+// [START product_offer-pre_purchase-js.error-ui]
 function displayErrorBanner(root, message) {
   const errorComponent = root.createComponent(Banner, { status: "critical" }, [
     message,
@@ -207,9 +207,9 @@ function displayErrorBanner(root, message) {
   topLevelComponent.appendChild(errorComponent);
   setTimeout(() => topLevelComponent.removeChild(errorComponent), 3000);
 }
-// [END product_offer-pre_purchase-js.step_6_4]
+// [END product_offer-pre_purchase-js.error-ui]
 
-// [START product_offer-pre_purchase-js.step_6_1]
+// [START product_offer-pre_purchase-js.offer-ui]
 function createApp(
   root,
   imageComponent,
@@ -244,7 +244,7 @@ function createApp(
     ]),
   ]);
 }
-// [END product_offer-pre_purchase-js.step_6_1]
+// [END product_offer-pre_purchase-js.offer-ui]
 
 function filterProductsOnOffer(lines, products) {
   const cartLineProductVariantIds = lines.current.map(
