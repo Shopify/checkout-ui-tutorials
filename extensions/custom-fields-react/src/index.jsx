@@ -8,36 +8,36 @@ import {
   Checkbox,
 } from "@shopify/checkout-ui-extensions-react";
 
-// [START custom-fields-react.ext-index]
+// [START custom-field-react.ext-index]
 render("Checkout::ShippingMethods::RenderAfter", () => <App />);
-// [END custom-fields-react.ext-index]
+// [END custom-field-react.ext-index]
 
 function App() {
   // Set up the checkbox state
   const [checked, setChecked] = useState(false);
 
-  // [START custom-fields-react.define-metafield]
+  // [START custom-field-react.define-metafield]
   const metafieldNamespace = "yourAppNamespace";
   const metafieldKey = "deliveryInstructions";
-  // [END custom-fields-react.define-metafield]
+  // [END custom-field-react.define-metafield]
 
-  // [START custom-fields-react.use-metafield]
+  // [START custom-field-react.use-metafield]
   const deliveryInstructions = useMetafield({
     namespace: metafieldNamespace,
     key: metafieldKey,
   });
-  // [END custom-fields-react.use-metafield]
+  // [END custom-field-react.use-metafield]
 
-  // [START custom-fields-react.update-metafield]
+  // [START custom-field-react.update-metafield]
   const applyMetafieldsChange = useApplyMetafieldsChange();
-  // [END custom-fields-react.update-metafield]
+  // [END custom-field-react.update-metafield]
 
   // Set a function to handle the Checkbox component's onChange event
   const handleChange = () => {
     setChecked(!checked);
   };
 
-  // [START custom-fields-react.instruction-ui]
+  // [START custom-field-react.instruction-ui]
   return (
     <BlockStack>
       <Checkbox checked={checked} onChange={handleChange}>
@@ -47,7 +47,7 @@ function App() {
         <TextField
           label="Delivery instructions"
           multiline={3}
-          // [START custom-fields-react.store-value]
+          // [START custom-field-react.store-value]
           onChange={(value) => {
             applyMetafieldsChange({
               type: "updateMetafield",
@@ -57,11 +57,11 @@ function App() {
               value,
             });
           }}
-          // [END custom-fields-react.store-value]
+          // [END custom-field-react.store-value]
           value={deliveryInstructions?.value}
         />
       )}
     </BlockStack>
   );
-  // [END custom-fields-react.instruction-ui]
+  // [END custom-field-react.instruction-ui]
 }
