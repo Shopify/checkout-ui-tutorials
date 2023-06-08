@@ -1,8 +1,8 @@
 type = "checkout_ui_extension"
 name = "custom-fields-react"
 
-# [START custom_field-react.step_3_1]
+# [START custom_field-react.ext-config]
 extension_points = [
   'Checkout::ShippingMethods::RenderAfter'
 ]
-# [END custom_field-react.step_3_1]
+# [END custom_field-react.ext-config]

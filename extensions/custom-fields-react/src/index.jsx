@@ -8,8 +8,9 @@ import {
   Checkbox,
 } from "@shopify/checkout-ui-extensions-react";
 
-// Set the entry point for the extension
+// [START custom-fields-react.ext-index]
 render("Checkout::ShippingMethods::RenderAfter", () => <App />);
+// [END custom-fields-react.ext-index]
 
 function App() {
   // Set up the checkbox state

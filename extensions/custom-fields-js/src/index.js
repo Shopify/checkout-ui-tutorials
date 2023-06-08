@@ -5,8 +5,9 @@ import {
   Checkbox,
 } from "@shopify/checkout-ui-extensions";
 
-// Set the entry point for the extension
+// [START custom-fields-js.ext-index]
 extend("Checkout::ShippingMethods::RenderAfter", (root, api) => {
+// [END custom-fields-js.ext-index]
   // Keep track of the UI state
   const state = {
     metafields: api.metafields.current,
