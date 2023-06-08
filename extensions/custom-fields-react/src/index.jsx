@@ -16,18 +16,21 @@ function App() {
   // Set up the checkbox state
   const [checked, setChecked] = useState(false);
 
-  // Define the metafield namespace and key
+  // [START custom-fields-react.define-metafield]
   const metafieldNamespace = "yourAppNamespace";
   const metafieldKey = "deliveryInstructions";
+  // [END custom-fields-react.define-metafield]
 
-  // Get a reference to the metafield
+  // [START custom-fields-react.use-metafield]
   const deliveryInstructions = useMetafield({
     namespace: metafieldNamespace,
     key: metafieldKey,
   });
+  // [END custom-fields-react.use-metafield]
 
-  // Set a function to handle updating a metafield
+  // [START custom-fields-react.update-metafield]
   const applyMetafieldsChange = useApplyMetafieldsChange();
+  // [END custom-fields-react.update-metafield]
 
   // Set a function to handle the Checkbox component's onChange event
   const handleChange = () => {
