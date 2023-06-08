@@ -191,12 +191,14 @@ function ProductOffer({ product, i18n, adding, handleAddToCart, showError }) {
             </Text>
             <Text appearance='subdued'>{renderPrice}</Text>
           </BlockStack>
+          {/* [START product_offer-pre_purchase-react.offer-ui-button] */}
           <Button
             kind='secondary'
             loading={adding}
             accessibilityLabel={`Add ${title} to cart`}
             onPress={() => handleAddToCart(variants.nodes[0].id)}
           >
+          {/* [END product_offer-pre_purchase-react.offer-ui-button] */}
             Add
           </Button>
         </InlineLayout>
