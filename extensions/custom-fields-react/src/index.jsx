@@ -37,7 +37,7 @@ function App() {
     setChecked(!checked);
   };
 
-  // Render the extension components
+  // [START custom-fields-react.instruction-ui]
   return (
     <BlockStack>
       <Checkbox checked={checked} onChange={handleChange}>
@@ -47,8 +47,8 @@ function App() {
         <TextField
           label="Delivery instructions"
           multiline={3}
+          // [START custom-fields-react.store-value]
           onChange={(value) => {
-            // Apply the change to the metafield
             applyMetafieldsChange({
               type: "updateMetafield",
               namespace: metafieldNamespace,
@@ -57,9 +57,11 @@ function App() {
               value,
             });
           }}
+          // [END custom-fields-react.store-value]
           value={deliveryInstructions?.value}
         />
       )}
     </BlockStack>
   );
+  // [END custom-fields-react.instruction-ui]
 }
