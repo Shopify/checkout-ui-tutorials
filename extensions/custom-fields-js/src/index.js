@@ -8,7 +8,6 @@ import {
 // [START custom-fields-js.ext-index]
 extend("Checkout::ShippingMethods::RenderAfter", (root, api) => {
 // [END custom-fields-js.ext-index]
-  // Keep track of the UI state
   const state = {
     metafields: api.metafields.current,
     showDeliveryInstructions: false,
@@ -25,7 +24,6 @@ extend("Checkout::ShippingMethods::RenderAfter", (root, api) => {
 function renderUI({ root, api, state }) {
   const { applyMetafieldChange } = api;
 
-  // In case this is a re-render, then remove all previous children
   for (const child of root.children) {
     root.removeChild(child);
   }
