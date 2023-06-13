@@ -6,8 +6,3 @@ extension_points = [
   'Checkout::ShippingMethods::RenderAfter'
 ]
 # [END custom_fields-react.ext-config]
-
-# liz do I need this
-# [[metafields]]
-# namespace = "yourAppNamespace"
-# key = "deliveryInstructions"
