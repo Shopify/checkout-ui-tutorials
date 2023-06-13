@@ -5,9 +5,9 @@ import {
   Checkbox,
 } from "@shopify/checkout-ui-extensions";
 
-// [START custom-fields-js.ext-index]
+// [START custom_fields-js.ext-index]
 extend("Checkout::ShippingMethods::RenderAfter", (root, api) => {
-// [END custom-fields-js.ext-index]
+// [END custom_fields-js.ext-index]
   const state = {
     metafields: api.metafields.current,
     showDeliveryInstructions: false,
@@ -28,17 +28,17 @@ function renderUI({ root, api, state }) {
     root.removeChild(child);
   }
 
-  // [START custom-fields-js.define-metafield]
+  // [START custom_fields-js.define-metafield]
   const metafieldNamespace = "yourAppNamespace";
   const metafieldKey = "deliveryInstructions";
-  // [END custom-fields-js.define-metafield]
+  // [END custom_fields-js.define-metafield]
 
   const deliveryInstructions = state.metafields?.find(
     (field) =>
       field.namespace === metafieldNamespace && field.key === metafieldKey
   );
 
-  // [START custom-fields-js.instruction-ui]
+  // [START custom_fields-js.instruction-ui]
   const app = root.createComponent(BlockStack, {}, [
     root.createComponent(
       Checkbox,
@@ -58,7 +58,7 @@ function renderUI({ root, api, state }) {
       root.createComponent(TextField, {
         multiline: 3,
         label: "Delivery instructions",
-        // [START custom-fields-js.store-value]
+        // [START custom_fields-js.store-value]
         onChange: (value) => {
           applyMetafieldChange({
             type: "updateMetafield",
@@ -68,12 +68,12 @@ function renderUI({ root, api, state }) {
             value,
           });
         },
-        // [END custom-fields-js.store-value]
+        // [END custom_fields-js.store-value]
         value: deliveryInstructions?.value,
       })
     );
   }
-  // [END custom-fields-js.instruction-ui]
+  // [END custom_fields-js.instruction-ui]
 
   root.appendChild(app);
 }
