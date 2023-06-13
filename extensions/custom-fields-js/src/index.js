@@ -14,10 +14,8 @@ extend("Checkout::ShippingMethods::RenderAfter", (root, api) => {
     showDeliveryInstructions: false,
   };
 
-  // Render the initial extension UI
   renderUI({ root, api, state });
 
-  // Keep track if metafields change. If they do, then re-render.
   api.metafields.subscribe((newMetafields) => {
     state.metafields = newMetafields;
     renderUI({ root, api, state });
@@ -32,17 +30,17 @@ function renderUI({ root, api, state }) {
     root.removeChild(child);
   }
 
-  // Define the metafield namespace and key
+  // [START custom-fields-js.define-metafield]
   const metafieldNamespace = "yourAppNamespace";
   const metafieldKey = "deliveryInstructions";
+  // [END custom-fields-js.define-metafield]
 
-  // Get a reference to the metafield
   const deliveryInstructions = state.metafields?.find(
     (field) =>
       field.namespace === metafieldNamespace && field.key === metafieldKey
   );
 
-  // Create the Checkbox component
+  // [START custom-fields-js.instruction-ui]
   const app = root.createComponent(BlockStack, {}, [
     root.createComponent(
       Checkbox,
@@ -57,14 +55,13 @@ function renderUI({ root, api, state }) {
     ),
   ]);
 
-  // If the Checkbox component is selected, then create a TextField component
   if (state.showDeliveryInstructions) {
     app.appendChild(
       root.createComponent(TextField, {
         multiline: 3,
         label: "Delivery instructions",
+        // [START custom-fields-js.store-value]
         onChange: (value) => {
-          // Apply the change to the metafield
           applyMetafieldChange({
             type: "updateMetafield",
             namespace: metafieldNamespace,
@@ -73,11 +70,12 @@ function renderUI({ root, api, state }) {
             value,
           });
         },
+        // [END custom-fields-js.store-value]
         value: deliveryInstructions?.value,
       })
     );
   }
+  // [END custom-fields-js.instruction-ui]
 
-  // Render the extension components
   root.appendChild(app);
 }
