@@ -13,8 +13,9 @@ render("Checkout::ShippingMethods::RenderAfter", () => <App />);
 // [END custom_fields-react.ext-index]
 
 function App() {
-  // Set up the checkbox state
+  // [START custom_fields-react.instruction-ui]
   const [checked, setChecked] = useState(false);
+  // [END custom_fields-react.instruction-ui]
 
   // [START custom_fields-react.define-metafield]
   const metafieldNamespace = "yourAppNamespace";
@@ -32,7 +33,6 @@ function App() {
   const applyMetafieldsChange = useApplyMetafieldsChange();
   // [END custom_fields-react.update-metafield]
 
-  // Set a function to handle the Checkbox component's onChange event
   const handleChange = () => {
     setChecked(!checked);
   };
